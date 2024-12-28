@@ -26,6 +26,7 @@ module Stack (
 import Data.List(reverse)
 import Data.Data (type Typeable)
 import GHC.Generics (type Generic)
+import Control.DeepSeq (type NFData)
 
 -- | The 'Stack' type represents a stack of elements of type 'a'.
 newtype Stack a = Stack [a]
@@ -37,8 +38,7 @@ deriving newtype instance Semigroup (Stack a)
 deriving newtype instance Monoid (Stack a)
 deriving newtype instance Applicative Stack
 deriving newtype instance Monad Stack
-
-
+deriving newtype instance NFData a => NFData (Stack a)
 
 -- | The 'empty' function creates an empty stack.
 empty :: Stack a
